@@ -30,7 +30,7 @@ looker.plugins.visualizations.add({
 		done()
 		return true
 	    }
-	};
+	    
 	this._container.innerHTML`
 <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="${post}" data-instgrm-version="13" style=" background:#FFF; border:0;height: 1000px; border-radius:3px; margin: 1px; max-width:540px; min-width:6px; padding:0;width:99%" scrolling=true>
 </blockquote>
