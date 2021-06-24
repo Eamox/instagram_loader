@@ -1,16 +1,18 @@
+
 looker.plugins.visualizations.add({
     create: function(element, config) {
 
-	
 	//embed script
-	var tag = document.createElement('script');
-	tag.async = true;
-	tag.src = 'https://www.instagram.com/embed.js';
+	var tag = document.createElement('script')
+	tag.src = '//www.instagram.com/embed.js';
 	element.appendChild(tag)
 
 	//make container
-	this._container = document.createElement('div').id('insta-container')
+	this._container = document.createElement('div')
+	this._container.id='insta-container'
 	element.append(this._container)
+
+	//make callback
 	
 
 	
@@ -18,24 +20,32 @@ looker.plugins.visualizations.add({
     },
     updateAsync: function(data, element, config, queryResponse, details, done) {
 
-	window.__igEmbedLoaded = window.__igEmbedLoaded || function( loadedItem ) {
-	    this._item = document.getElementById(loadedItem).getAttribute('data-instgrm-permalink')
-	    done()
-	};
+
 
 	post = `${data[0][queryResponse.fields.dimensions[0].name].value}?utm_source=ig_embed&utm_campaign=loading`
 
+
+
 	var block;
 	if (this._item && this._item == post) {
-		done()
-		return true
-	    }
-	};
-	this._container.innerHTML`
+	    done()
+	    return true
+	}
+	
+	this._container.innerHTML=`
 <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="${post}" data-instgrm-version="13" style=" background:#FFF; border:0;height: 1000px; border-radius:3px; margin: 1px; max-width:540px; min-width:6px; padding:0;width:99%" scrolling=true>
 </blockquote>
 `;
-    window.instgrm.Embeds.process()
+	window.instgrm.Embeds.process()
+	var iframe = document.getElementsByTagName("iframe");
+	iframe[0].addEventListener("load", function() {
+	    this._item=post
+	    done()
+	})
+
+
+
+
 
     }
 })
