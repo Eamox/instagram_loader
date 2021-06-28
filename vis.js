@@ -39,16 +39,11 @@ looker.plugins.visualizations.add({
 
     var checkExist = setInterval(function() {
       if (document.getElementsByTagName("iframe").length) {
-        var iframe = document.getElementsByTagName("iframe");
-        iframe[0].addEventListener("load", function() {
           console.log('done')
           done()
-        })
-        clearInterval(checkExist);
+          clearInterval(checkExist);
       }
     }, 100);
-
-
 
 
 
