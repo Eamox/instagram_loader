@@ -4,6 +4,7 @@ looker.plugins.visualizations.add({
     //embed script
     var tag = document.createElement('script')
     tag.src = '//www.instagram.com/embed.js';
+    tag.async =true
     element.appendChild(tag)
 
     //make container
