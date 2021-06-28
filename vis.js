@@ -37,15 +37,7 @@ looker.plugins.visualizations.add({
 </blockquote>
 `;
     window.instgrm.Embeds.process()
-
-    var checkExist = setInterval(function() {
-      if (document.getElementsByTagName("iframe").length) {
-          console.log('done')
-          done()
-          clearInterval(checkExist);
-      }
-      else {console.log("not yet")}
-    }, 100);
+    done()
 
 
 
