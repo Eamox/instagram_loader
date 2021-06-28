@@ -27,7 +27,6 @@ looker.plugins.visualizations.add({
 
     if (this._item && this._item == post) {
       console.log("running same")
-      done()
       return true
     }
 
