@@ -1,18 +1,5 @@
 
-function waitForElement(done){
-    if(typeof window.instgrm !== "undefined"){
-	console.log('exists')
-	window.instgrm.Embeds.process()
-	var iframe = document.getElementsByTagName("iframe");
-	iframe[0].addEventListener("load", function() {
-	    console.log('done')
-	    done()
-	})
-    }
-    else{
-        setTimeout(waitForElement, 250);
-    }
-}
+
 
 looker.plugins.visualizations.add({
   create: function(element, config) {
@@ -36,13 +23,26 @@ looker.plugins.visualizations.add({
   updateAsync: function(data, element, config, queryResponse, details, done) {
 
 
-
+      function waitForElement(){
+	  if(typeof window.instgrm !== "undefined"){
+	      console.log('exists')
+	      window.instgrm.Embeds.process()
+	      var iframe = document.getElementsByTagName("iframe");
+	      iframe[0].addEventListener("load", function() {
+		  console.log('done')
+		  done()
+	      })
+	  }
+	  else{
+              setTimeout(waitForElement, 250);
+	  }
+      }
+      
     post = `${data[0][queryResponse.fields.dimensions[0].name].value}?utm_source=ig_embed&utm_campaign=loading`
 
 
     if (this._item && this._item == post) {
 	console.log("running same")
-	done()
       return true
     }
 
@@ -53,7 +53,7 @@ looker.plugins.visualizations.add({
 </blockquote>
 `;
 
-      waitForElement(done)
+      waitForElement()
       console.log('done function done.')
 
 
