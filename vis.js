@@ -43,6 +43,7 @@ looker.plugins.visualizations.add({
           done()
           clearInterval(checkExist);
       }
+      else {console.log("not yet")}
     }, 100);
 
 
